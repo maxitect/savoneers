@@ -1,24 +1,39 @@
+"use client";
+
 import Image from "next/image";
+import { BasketItem, useBasket } from "@/contexts/BasketContext";
+import toast from "react-hot-toast";
 
 const products = [
-  { id: 1, name: "Lavender Dream", price: 5.99, image: "/lavender-soap.jpg" },
-  { id: 2, name: "Citrus Burst", price: 5.99, image: "/citrus-soap.jpg" },
-  { id: 3, name: "Ocean Breeze", price: 5.99, image: "/ocean-soap.jpg" },
-  { id: 4, name: "Vanilla Bliss", price: 5.99, image: "/vanilla-soap.jpg" },
+  { id: "1", name: "Lavender Dream", price: 5.99, image: "/lavender-soap.jpg" },
+  { id: "2", name: "Citrus Burst", price: 5.99, image: "/citrus-soap.jpg" },
+  { id: "3", name: "Ocean Breeze", price: 5.99, image: "/ocean-soap.jpg" },
+  { id: "4", name: "Vanilla Bliss", price: 5.99, image: "/vanilla-soap.jpg" },
   {
-    id: 5,
+    id: "5",
     name: "Eucalyptus Mint",
     price: 5.99,
     image: "/eucalyptus-soap.jpg",
   },
-  { id: 6, name: "Rose Petal", price: 5.99, image: "/rose-soap.jpg" },
+  { id: "6", name: "Rose Petal", price: 5.99, image: "/rose-soap.jpg" },
 ];
 
+interface Product extends Omit<BasketItem, "quantity"> {
+  image: string;
+}
+
 export default function Shop() {
+  const { addToBasket } = useBasket();
+
+  const handleAddToBasket = (product: Product) => {
+    addToBasket({ ...product, quantity: 1 });
+    toast.success(`${product.name} added to basket`);
+  };
+
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
-        Soap Shop
+        Our Products
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((product) => (
@@ -35,9 +50,12 @@ export default function Shop() {
             />
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-              <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
-              <button className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition duration-300">
-                Add to Cart
+              <p className="text-gray-600 mb-4">£{product.price.toFixed(2)}</p>
+              <button
+                className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition duration-300"
+                onClick={() => handleAddToBasket(product)}
+              >
+                Add to Basket
               </button>
             </div>
           </div>
