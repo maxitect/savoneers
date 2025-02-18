@@ -1,8 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { User } from "@supabase/auth-js";
 
 interface Order {
@@ -16,6 +24,7 @@ export default function Account() {
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserAndOrders = async () => {
@@ -23,9 +32,8 @@ export default function Account() {
         const {
           data: { user },
         } = await supabase.auth.getUser();
-        setUser(user);
-
         if (user) {
+          setUser(user);
           const { data, error } = await supabase
             .from("orders")
             .select("*")
@@ -37,6 +45,8 @@ export default function Account() {
           } else {
             setOrders(data);
           }
+        } else {
+          router.push("/signin");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -46,69 +56,73 @@ export default function Account() {
     };
 
     fetchUserAndOrders();
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
-        <p>Loading...</p>
+      <div className="container mx-auto px-4 py-12">
+        <Skeleton className="h-12 w-3/4 mb-4" />
+        <Skeleton className="h-64 w-full" />
       </div>
     );
   }
 
   if (!user) {
-    return (
-      <div className="container mx-auto px-4 py-12 text-center">
-        <p>Please sign in to view your account.</p>
-        <Link href="/signin" className="text-teal-600 hover:underline">
-          Sign In
-        </Link>
-      </div>
-    );
+    return null;
   }
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-teal-800">Your Account</h1>
-      <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Account Information</h2>
-        <p>
-          <strong>Email:</strong> {user.email}
-        </p>
-        <p>
-          <strong>Member since:</strong>{" "}
-          {new Date(user.created_at).toLocaleDateString()}
-        </p>
-      </div>
-      <div className="bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-semibold mb-4">Your Orders</h2>
-        {orders.length > 0 ? (
-          <table className="w-full">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left p-2">Order ID</th>
-                <th className="text-left p-2">Date</th>
-                <th className="text-left p-2">Total</th>
-                <th className="text-left p-2">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order.id} className="border-b">
-                  <td className="p-2">{order.id}</td>
-                  <td className="p-2">
-                    {new Date(order.created_at).toLocaleDateString()}
-                  </td>
-                  <td className="p-2">£{order.total.toFixed(2)}</td>
-                  <td className="p-2">{order.status}</td>
+      <h1 className="text-4xl font-bold mb-8 text-primary">Your Account</h1>
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Account Information</CardTitle>
+          <CardDescription>Your personal details</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Member since:</strong>{" "}
+            {new Date(user.created_at).toLocaleDateString()}
+          </p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Your Orders</CardTitle>
+          <CardDescription>A summary of your recent orders</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {orders.length > 0 ? (
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left p-2">Order ID</th>
+                  <th className="text-left p-2">Date</th>
+                  <th className="text-left p-2">Total</th>
+                  <th className="text-left p-2">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>You haven&apos;t placed any orders yet.</p>
-        )}
-      </div>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order.id} className="border-b">
+                    <td className="p-2">{order.id}</td>
+                    <td className="p-2">
+                      {new Date(order.created_at).toLocaleDateString()}
+                    </td>
+                    <td className="p-2">£{order.total.toFixed(2)}</td>
+                    <td className="p-2">{order.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>You haven&apos;t placed any orders yet.</p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
