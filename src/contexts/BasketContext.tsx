@@ -5,7 +5,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import Cookies from "js-cookie";
 
-interface BasketItem {
+export interface BasketItem {
   id: string;
   name: string;
   price: number;
