@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { BasketProvider } from "@/contexts/BasketContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} flex flex-col min-h-screen`}>
-        <Toaster />
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <BasketProvider>
+          <Toaster />
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </BasketProvider>
       </body>
     </html>
   );
