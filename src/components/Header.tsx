@@ -1,14 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { User } from "@supabase/auth-js";
 import { useBasket } from "@/contexts/BasketContext";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, User as UserComponent } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
@@ -16,6 +24,15 @@ export default function Header() {
   const { basket } = useBasket();
 
   useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    fetchUser();
+
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
@@ -44,84 +61,81 @@ export default function Header() {
 
   return (
     <header className="bg-teal-500 text-white">
-      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <Image src="/logo.svg" alt="Savoneers Logo" width={40} height={40} />
-          <span className="ml-2 text-2xl font-bold">Savoneers</span>
+          <span className="ml-2 text-2xl font-logo">savoneers</span>
         </Link>
         <nav>
-          <ul className="flex space-x-6 items-center">
+          <ul className="flex space-x-4">
             <li>
-              <Link href="/" className="hover:text-teal-200">
-                Home
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/">Home</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/products" className="hover:text-teal-200">
-                Products
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/about">About</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/subscription" className="hover:text-teal-200">
-                Subscribe
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/subscription">Subscribe</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/about" className="hover:text-teal-200">
-                About
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/shop">Shop</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/faq" className="hover:text-teal-200">
-                FAQ
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/contact">Contact</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-teal-200">
-                Contact
-              </Link>
+              <Button variant="ghost" asChild>
+                <Link href="/basket" className="relative">
+                  <ShoppingBasket className="w-6 h-6" />
+                  {basketItemsCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full px-2 py-1 text-xs font-bold">
+                      {basketItemsCount}
+                    </span>
+                  )}
+                </Link>
+              </Button>
             </li>
             <li>
-              <Link
-                href="/basket"
-                className="hover:text-teal-200 flex items-center"
-              >
-                <ShoppingBasket className="w-6 h-6 mr-1" />
-                <span className="bg-white text-teal-500 rounded-full px-2 py-1 text-xs font-bold">
-                  {basketItemsCount}
-                </span>
-              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="p-2">
+                    <UserComponent className="w-6 h-6" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {user ? (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/account">Account Settings</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={handleSignOut}>
+                        Sign Out
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/signin">Sign In</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/signup">Sign Up</Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </li>
-            {user ? (
-              <>
-                <li>
-                  <Link href="/account" className="hover:text-teal-200">
-                    Account
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={handleSignOut}
-                    className="hover:text-teal-200"
-                  >
-                    Sign Out
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link href="/signin" className="hover:text-teal-200">
-                    Sign In
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/signup" className="hover:text-teal-200">
-                    Sign Up
-                  </Link>
-                </li>
-              </>
-            )}
           </ul>
         </nav>
       </div>
