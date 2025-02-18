@@ -7,10 +7,13 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { User } from "@supabase/auth-js";
+import { useBasket } from "@/contexts/BasketContext";
+import { ShoppingBasket } from "lucide-react";
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const { basket } = useBasket();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -34,6 +37,11 @@ export default function Header() {
     }
   };
 
+  const basketItemsCount = basket.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <header className="bg-teal-500 text-white">
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
@@ -42,7 +50,7 @@ export default function Header() {
           <span className="ml-2 text-2xl font-bold">Savoneers</span>
         </Link>
         <nav>
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-6 items-center">
             <li>
               <Link href="/" className="hover:text-teal-200">
                 Home
@@ -71,6 +79,17 @@ export default function Header() {
             <li>
               <Link href="/contact" className="hover:text-teal-200">
                 Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/basket"
+                className="hover:text-teal-200 flex items-center"
+              >
+                <ShoppingBasket className="w-6 h-6 mr-1" />
+                <span className="bg-white text-teal-500 rounded-full px-2 py-1 text-xs font-bold">
+                  {basketItemsCount}
+                </span>
               </Link>
             </li>
             {user ? (
