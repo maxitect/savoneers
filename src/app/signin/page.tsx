@@ -27,7 +27,7 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Logged in successfully!");
+        toast.success("Signed in successfully!");
         router.push("/account");
       } else {
         toast.error(data.error || "An error occurred during log in.");
