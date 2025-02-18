@@ -5,7 +5,7 @@ export default function Home() {
     <div className="container mx-auto px-4 py-12">
       <section className="text-center mb-16">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-teal-800">
-          Welcome to Savoneers
+          The cleanest club in town
         </h1>
         <p className="text-xl mb-8 text-gray-600">
           Discover our luxurious, handcrafted soap bars made in England with
