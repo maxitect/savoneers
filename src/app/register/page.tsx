@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
-export default function SignIn() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function SignIn() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/signin", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -27,12 +27,12 @@ export default function SignIn() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Signed in successfully!");
-        router.push("/account");
+        toast.success("Account created successfully! Please login.");
+        router.push("/login");
       } else {
-        toast.error(data.error || "An error occurred during sign in.");
+        toast.error(data.error || "An error occurred during sign up.");
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
       toast.error("An unexpected error occurred. Please try again.");
     } finally {
@@ -43,7 +43,7 @@ export default function SignIn() {
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
-        Sign In
+        Sign Up
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -86,13 +86,13 @@ export default function SignIn() {
           className="w-full bg-teal-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-600 transition duration-300 disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
       <p className="mt-4 text-center">
-        Don&apos;t have an account?{" "}
-        <Link href="/signup" className="text-teal-600 hover:underline">
-          Sign Up
+        Already have an account?{" "}
+        <Link href="/signin" className="text-teal-600 hover:underline">
+          Sign In
         </Link>
       </p>
     </div>
