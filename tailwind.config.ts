@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        logo: ['"Do Hyeon"', "serif"],
+        logo: ["var(--font-aquawax)", "sans-serif"],
         main: ['"Josefin Sans"', "sans-serif"],
       },
       colors: {
