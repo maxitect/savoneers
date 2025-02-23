@@ -6,6 +6,14 @@ import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import { BasketProvider } from "@/contexts/BasketContext";
 
+import localFont from "next/font/local";
+
+export const aquawax = localFont({
+  src: "../fonts/AquawaxPro-Regular.woff2",
+  variable: "--font-aquawax",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Savoneers - Premium Soap Bar Subscriptions",
   description:
@@ -18,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={aquawax.variable}>
       <body className="font-main flex flex-col min-h-screen">
         <BasketProvider>
           <Toaster />
