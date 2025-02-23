@@ -1,56 +1,77 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 
 export default function Home() {
+  const items = [
+    {
+      title: "Made in England",
+      text: "Crafted with care in our English workshop using traditional methods.",
+    },
+    {
+      title: "100% Natural",
+      text: "Our soaps are made with all-natural, ethically sourced ingredients.",
+    },
+    {
+      title: "Eco-Friendly",
+      text: "Sustainable packaging and production methods to minimize our impact.",
+    },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-12">
-      <section className="text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-teal-800">
-          The cleanest club in town
-        </h1>
-        <p className="text-xl mb-8 text-gray-600">
-          Discover our luxurious, handcrafted soap bars made in England with
-          100% natural ingredients.
-        </p>
-        <Link
-          href="/subscription"
-          className="bg-teal-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-600 transition duration-300"
-        >
-          Start Your Free Trial
-        </Link>
-        <p className="mt-4 text-teal-600 font-semibold">
-          First month free! No commitment required.
-        </p>
-      </section>
+    <section className="relative h-screen flex flex-col items-center px-4 py-12 text-center">
+      {/* Background Image */}
+      <Image
+        src="/subscription_box.jpg"
+        alt="Background Image"
+        fill
+        className="absolute inset-0 object-cover object-left -z-10"
+      />
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <div className="bg-yellow-100 p-6 rounded-lg text-center">
-          <h2 className="text-2xl font-semibold mb-4 text-yellow-800">
-            Made in England
-          </h2>
-          <p>
-            Crafted with care in our English workshop using traditional methods.
+      {/* Hero Section */}
+      <div className="mt-20 flex flex-col justify-between h-screen w-screen">
+        <div>
+          <h1 className=" text-4xl md:text-6xl font-bold text-black">
+            The cleanest club in town
+          </h1>
+          <p className="text-xl text-black">
+            Discover our luxurious, handcrafted soap bars made in England with
+            100% natural ingredients.
           </p>
         </div>
-        <div className="bg-green-100 p-6 rounded-lg text-center">
-          <h2 className="text-2xl font-semibold mb-4 text-green-800">
-            100% Natural
-          </h2>
-          <p>
-            Our soaps are made with all-natural, ethically sourced ingredients.
+        <div>
+          <Link
+            href="/subscription"
+            className="bg-black text-white hover:bg-white hover:text-black border-2 border-black px-8 py-3 text-lg font-semibold transition duration-300"
+          >
+            Start Your Free Trial
+          </Link>
+          <p className="mt-4 text-black font-semibold">
+            First month free! No commitment required.
           </p>
         </div>
-        <div className="bg-blue-100 p-6 rounded-lg text-center">
-          <h2 className="text-2xl font-semibold mb-4 text-blue-800">
-            Eco-Friendly
-          </h2>
-          <p>
-            Sustainable packaging and production methods to minimize our
-            environmental impact.
-          </p>
+        {/* Popover Buttons at the Bottom */}
+        <div className="flex justify-around">
+          {items.map((item, index) => (
+            <Popover key={index}>
+              <PopoverTrigger asChild>
+                <button className="max-w-xs text-black text-center border border-black px-4 py-2 hover:bg-black hover:text-white transition">
+                  <h2 className="text-2xl font-semibold">{item.title}</h2>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="bg-white shadow-lg max-w-md text-black text-center">
+                {item.text}
+              </PopoverContent>
+            </Popover>
+          ))}
         </div>
-      </section>
-
-      {/* Rest of the component remains the same */}
-    </div>
+      </div>
+    </section>
   );
 }
