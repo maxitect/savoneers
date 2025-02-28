@@ -57,11 +57,11 @@ export default function Home() {
           </p>
         </div>
         {/* Popover Buttons at the Bottom */}
-        <div className="flex justify-around">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-4 w-full">
           {items.map((item, index) => (
             <Popover key={index}>
               <PopoverTrigger asChild>
-                <button className="max-w-xs text-black text-center border border-black px-4 py-2 hover:bg-black hover:text-white transition">
+                <button className="max-w-xs mx-auto w-full text-black text-center border border-black px-4 py-2 hover:bg-black hover:text-white transition">
                   <h2 className="text-2xl font-semibold">{item.title}</h2>
                 </button>
               </PopoverTrigger>
