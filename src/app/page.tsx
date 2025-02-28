@@ -31,7 +31,7 @@ export default function Home() {
         src="/subscription_box.jpg"
         alt="Background Image"
         fill
-        className="absolute inset-0 object-cover object-left -z-10"
+        className="absolute inset-0 object-cover object-left-bottom -z-10"
       />
 
       {/* Hero Section */}
