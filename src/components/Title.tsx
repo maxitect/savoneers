@@ -16,7 +16,7 @@ export default function Title({
   onSearchChange = () => {},
 }: TitleProps) {
   return (
-    <div className="bg-gradient-to-br from-pink1 to-pink2">
+    <div className="bg-gradient-to-br from-pink_main to-pink_secondary">
       <div className="h-[4.5rem] shadow-md"></div>
       <div className="container mx-auto p-10">
         <div className="flex flex-col md:flex-row justify-between items-center">

@@ -15,6 +15,8 @@ export default {
         main: ['"Josefin Sans"', "sans-serif"],
       },
       colors: {
+        pink_main: "#ff8361",
+        pink_secondary: "#ea9f84",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
