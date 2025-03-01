@@ -1,21 +1,25 @@
 import Image from "next/image";
+import Title from "@/components/Title";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function About() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
-        About Savoneers
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <Image
-            src="/about.webp"
-            alt="Savoneers workshop"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-md"
-          />
-        </div>
+    <div className="min-h-screen bg-white">
+      <Title title="About" showSearch={false} />
+      
+      <div className="container mx-auto px-4 py-12">
+      <Card className="border-black rounded-none shadow-md mb-12">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center p-8">
+            <div>
+              <Image
+                src="/about/story.jpeg"
+                alt="Savoneers workshop"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
         <div>
           <h2 className="text-2xl font-semibold mb-4 text-teal-700">
             Our Story
@@ -72,23 +76,27 @@ export default function About() {
             ethical world. Together, we can make a difference—one soap bar at a
             time.
           </p>
-        </div>
-      </div>
-      <div className="mt-12 text-center">
-        <h2 className="text-2xl font-semibold mb-4 text-teal-700">
-          Join Our Community
-        </h2>
-        <p className="mb-4 text-gray-700">
-          Stay updated with our latest products, artisan stories, and
-          sustainability tips.
-        </p>
-        <a
-          href="/subscribe"
-          className="inline-block bg-teal-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-600 transition-colors"
-        >
-          Subscribe to Our Newsletter
-        </a>
-      </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="border-black rounded-none shadow-md">
+        <CardContent className="p-8 text-center">
+          <h2 className="text-2xl font-semibold mb-4 text-teal-700">
+            Join Our Community
+          </h2>
+          <p className="mb-4 text-gray-700">
+            Stay updated with our latest products, artisan stories, and
+            sustainability tips.
+          </p>
+          <a
+            href="/subscription"
+            className="inline-block bg-black text-white px-6 py-3 border border-black rounded-none shadow-md hover:bg-white hover:text-black transition-colors"
+          >
+            Subscribe to Our Newsletter
+          </a>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Button from "@/components/Button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Title from "@/components/Title";
 
 export default function Subscription() {
   const [plan, setPlan] = useState<"monthly" | "bimonthly">("monthly");
@@ -20,58 +22,61 @@ export default function Subscription() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
-        Subscribe to Savoneers
-      </h1>
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          Choose Your Plan
-        </h2>
-        <div className="flex justify-center space-x-4 mb-8">
-          <button
-            onClick={() => setPlan("monthly")}
-            className={`px-6 py-2 rounded-full ${
-              plan === "monthly"
-                ? "bg-pink-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setPlan("bimonthly")}
-            className={`px-6 py-2 rounded-full ${
-              plan === "bimonthly"
-                ? "bg-pink-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            Every 2 Months
-          </button>
-        </div>
-        <div className="flex justify-center space-x-4 mb-8">
-          <button
-            onClick={() => setQuantity("basic")}
-            className={`px-6 py-2 rounded-full ${
-              quantity === "basic"
-                ? "bg-pink-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            1 Soap + 1 Shampoo Bar
-          </button>
-          <button
-            onClick={() => setQuantity("premium")}
-            className={`px-6 py-2 rounded-full ${
-              quantity === "premium"
-                ? "bg-pink-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            2 Soaps + 1 Shampoo Bar
-          </button>
-        </div>
+    <div className="min-h-screen bg-white">
+      <Title title="Subscribe" showSearch={false} />
+      
+      <div className="container mx-auto px-4 py-12">
+        <Card className="max-w-2xl mx-auto border-black rounded-none shadow-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-semibold text-center">
+              Choose Your Plan
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-center space-x-4 mb-8">
+              <button
+                onClick={() => setPlan("monthly")}
+                className={`px-6 py-2 border ${
+                  plan === "monthly"
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black border-black"
+                } rounded-none`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setPlan("bimonthly")}
+                className={`px-6 py-2 border ${
+                  plan === "bimonthly"
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black border-black"
+                } rounded-none`}
+              >
+                Every 2 Months
+              </button>
+            </div>
+            <div className="flex justify-center space-x-4 mb-8">
+              <button
+                onClick={() => setQuantity("basic")}
+                className={`px-6 py-2 border ${
+                  quantity === "basic"
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black border-black"
+                } rounded-none`}
+              >
+                1 Soap + 1 Shampoo Bar
+              </button>
+              <button
+                onClick={() => setQuantity("premium")}
+                className={`px-6 py-2 border ${
+                  quantity === "premium"
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black border-black"
+                } rounded-none`}
+              >
+                2 Soaps + 1 Shampoo Bar
+              </button>
+            </div>
         <div className="text-center mb-8">
           <p className="text-3xl font-bold text-teal-800">
             £{prices[plan][quantity].toFixed(2)}
@@ -80,35 +85,40 @@ export default function Subscription() {
             {plan === "monthly" ? "Billed monthly" : "Billed every 2 months"}
           </p>
         </div>
-        <div className="bg-yellow-100 p-4 rounded-lg text-center mb-8">
-          <p className="text-yellow-800 font-semibold">First Month Free!</p>
-          <p className="text-sm text-yellow-700">
-            Start your subscription today and enjoy your first month on us.
-          </p>
-        </div>
-        <form>
-          {/* Form fields remain the same */}
-          <Button type="submit" className="w-full">
-            Start My Free Trial
-          </Button>
-        </form>
-        <p className="mt-4 text-sm text-gray-600 text-center">
-          By subscribing, you agree to our{" "}
-          <Link
-            href="/terms-of-service"
-            className="text-teal-600 hover:underline"
-          >
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="/privacy-policy"
-            className="text-teal-600 hover:underline"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </p>
+            <div className="bg-yellow-100 p-4 border border-yellow-400 text-center mb-8">
+              <p className="text-yellow-800 font-semibold">First Month Free!</p>
+              <p className="text-sm text-yellow-700">
+                Start your subscription today and enjoy your first month on us.
+              </p>
+            </div>
+            <form>
+              {/* Form fields remain the same */}
+              <Button 
+                type="submit" 
+                className="w-full bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors"
+              >
+                Start My Free Trial
+              </Button>
+            </form>
+            <p className="mt-4 text-sm text-gray-600 text-center">
+              By subscribing, you agree to our{" "}
+              <Link
+                href="/terms"
+                className="text-black font-medium hover:underline"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                className="text-black font-medium hover:underline"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
