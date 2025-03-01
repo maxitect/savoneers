@@ -13,12 +13,6 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 import soapData from "@/data/soap.json";
 import shampooData from "@/data/shampoo.json";
@@ -35,18 +29,10 @@ interface Product extends Omit<BasketItem, "quantity"> {
   type: string;
 }
 
-type SortOption =
-  | "price-asc"
-  | "price-desc"
-  | "name-asc"
-  | "name-desc"
-  | "newest";
-
 export default function Shop() {
   const [filter, setFilter] = useState<"all" | "soap" | "shampoo">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts);
-  const [sortBy, setSortBy] = useState<SortOption>("price-asc");
   const { addToBasket } = useBasket();
 
   useEffect(() => {
@@ -68,30 +54,8 @@ export default function Shop() {
       );
     }
 
-    // Apply sorting
-    const sortedProducts = [...products]; // Create a new array to avoid mutation issues
-    
-    switch (sortBy) {
-      case "price-asc":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      case "name-asc":
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "name-desc":
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case "newest":
-        // In a real app, you'd have a date field to sort by
-        // For now, we'll just use the original order
-        break;
-    }
-
-    setFilteredProducts(sortedProducts);
-  }, [filter, sortBy, searchQuery]);
+    setFilteredProducts(products);
+  }, [filter, searchQuery]);
 
   const handleAddToBasket = (product: Product) => {
     addToBasket({
@@ -103,37 +67,32 @@ export default function Shop() {
     toast.success(`${product.name} added to basket`);
   };
 
-  const getSortLabel = (sort: SortOption): string => {
-    switch (sort) {
-      case "price-asc":
-        return "Price: lowest to highest";
-      case "price-desc":
-        return "Price: highest to lowest";
-      case "name-asc":
-        return "Name: A to Z";
-      case "name-desc":
-        return "Name: Z to A";
-      case "newest":
-        return "Newest first";
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-4 md:mb-0">
-              Our Products
+            <h1 className="text-4xl font-bold text-black uppercase mb-4 md:mb-0">
+              Shop
             </h1>
-            <div className="w-full md:w-1/3">
+            <div className="w-full md:w-1/3 relative">
               <Input
                 type="search"
-                placeholder="Search products..."
+                placeholder="Search soaps..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-white/90 border-none"
+                className="bg-white border-black rounded-none pr-10"
               />
+              <button 
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                onClick={() => {/* Search happens live */}}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -141,7 +100,7 @@ export default function Shop() {
       
       <div className="container mx-auto px-4 py-8">
 
-        <div className="flex flex-col md:flex-row justify-between items-start mb-8">
+        <div className="mb-8">
           <Tabs defaultValue="all" className="mb-4 md:mb-0">
             <TabsList className="bg-gray-100">
               <TabsTrigger value="all" onClick={() => setFilter("all")}>
@@ -155,34 +114,6 @@ export default function Shop() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-
-          <div className="flex items-center space-x-2">
-            <span className="text-sm font-medium">SORT</span>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="border-gray-300">
-                  {getSortLabel(sortBy)}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setSortBy("price-asc")}>
-                  Price: lowest to highest
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("price-desc")}>
-                  Price: highest to lowest
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("name-asc")}>
-                  Name: A to Z
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("name-desc")}>
-                  Name: Z to A
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("newest")}>
-                  Newest first
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
