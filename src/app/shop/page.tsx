@@ -6,7 +6,13 @@ import { BasketItem, useBasket } from "@/contexts/BasketContext";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import soapData from "@/data/soap.json";
 import shampooData from "@/data/shampoo.json";
@@ -72,7 +78,10 @@ export default function Shop() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
-            <Card key={product.id} className="overflow-hidden border-none shadow-lg bg-white/90 backdrop-blur-sm">
+            <Card
+              key={product.id}
+              className="overflow-hidden border-none shadow-lg bg-white/90 backdrop-blur-sm"
+            >
               <div className="relative h-64 w-full">
                 <Image
                   src={product.image || "/placeholder.svg"}
@@ -87,8 +96,10 @@ export default function Shop() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-xl">{product.name}</CardTitle>
               </CardHeader>
-              <CardContent className="pb-2">
-                <p className="text-lg font-semibold">£{product.price.toFixed(2)}</p>
+              <CardContent className="pb-2 bg-transparent">
+                <p className="text-lg font-semibold">
+                  £{product.price.toFixed(2)}
+                </p>
               </CardContent>
               <CardFooter>
                 <Button
