@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "Coconut Silk",
+    "price": 5.99,
+    "image": "/products/coconut.jpeg"
+  },
+  {
+    "id": "2",
+    "name": "Tea Tree Infusion",
+    "price": 5.99,
+    "image": "/products/teatree.jpeg"
+  },
+  {
+    "id": "3",
+    "name": "Cedarwood Calm",
+    "price": 5.99,
+    "image": "/products/cedarwood.jpeg"
+  },
+  {
+    "id": "4",
+    "name": "Peppermint Refresh",
+    "price": 5.99,
+    "image": "/products/peppermint.jpeg"
+  },
+  {
+    "id": "5",
+    "name": "Lemongrass Lift",
+    "price": 5.99,
+    "image": "/products/lemongrass.jpeg"
+  },
+  {
+    "id": "6",
+    "name": "Herbal Harmony",
+    "price": 5.99,
+    "image": "/products/herbal.jpeg"
+  }
+]
