@@ -1,36 +1,36 @@
 [
   {
-    "id": "1",
+    "id": "soap_01",
     "name": "Lavender Dream",
     "price": 5.99,
     "image": "/products/lavender.jpeg"
   },
   {
-    "id": "2",
+    "id": "soap_02",
     "name": "Citrus Burst",
     "price": 5.99,
     "image": "/products/citrus.jpeg"
   },
   {
-    "id": "3",
+    "id": "soap_03",
     "name": "Ocean Breeze",
     "price": 5.99,
     "image": "/products/ocean.jpeg"
   },
   {
-    "id": "4",
+    "id": "soap_04",
     "name": "Vanilla Bliss",
     "price": 5.99,
     "image": "/products/vanilla.jpeg"
   },
   {
-    "id": "5",
+    "id": "soap_05",
     "name": "Eucalyptus Mint",
     "price": 5.99,
     "image": "/products/eucalyptus.jpeg"
   },
   {
-    "id": "6",
+    "id": "soap_06",
     "name": "Rose Petal",
     "price": 5.99,
     "image": "/products/rose.jpeg"

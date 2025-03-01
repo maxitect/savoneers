@@ -1,36 +1,36 @@
 [
   {
-    "id": "1",
+    "id": "shampoo_01",
     "name": "Coconut Silk",
     "price": 5.99,
     "image": "/products/coconut.jpeg"
   },
   {
-    "id": "2",
+    "id": "shampoo_02",
     "name": "Tea Tree Infusion",
     "price": 5.99,
     "image": "/products/teatree.jpeg"
   },
   {
-    "id": "3",
+    "id": "shampoo_03",
     "name": "Cedarwood Calm",
     "price": 5.99,
     "image": "/products/cedarwood.jpeg"
   },
   {
-    "id": "4",
+    "id": "shampoo_04",
     "name": "Peppermint Refresh",
     "price": 5.99,
     "image": "/products/peppermint.jpeg"
   },
   {
-    "id": "5",
+    "id": "shampoo_05",
     "name": "Lemongrass Lift",
     "price": 5.99,
     "image": "/products/lemongrass.jpeg"
   },
   {
-    "id": "6",
+    "id": "shampoo_06",
     "name": "Herbal Harmony",
     "price": 5.99,
     "image": "/products/herbal.jpeg"
