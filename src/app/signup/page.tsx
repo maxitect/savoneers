@@ -47,7 +47,7 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-white">
       <Title title="Sign Up" showSearch={false} />
-      
+
       <div className="container mx-auto px-4 py-12">
         <form
           onSubmit={handleSubmit}
@@ -65,7 +65,7 @@ export default function Register() {
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
@@ -77,22 +77,23 @@ export default function Register() {
                 required
               />
             </div>
-            
-            <Button 
-              type="submit" 
-              className="w-full bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors" 
+
+            <Button
+              type="submit"
+              className="w-full bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors"
               disabled={loading}
             >
               {loading ? "Signing Up..." : "Sign Up"}
             </Button>
           </div>
-      </form>
-      <p className="mt-4 text-center">
-        Already have an account?{" "}
-        <Link href="/signin" className="text-teal-600 hover:underline">
-          Sign In
-        </Link>
-      </p>
+        </form>
+        <p className="mt-4 text-center">
+          Already have an account?{" "}
+          <Link href="/signin" className="text-teal-600 hover:underline">
+            Sign In
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
