@@ -32,7 +32,8 @@ interface Product extends Omit<BasketItem, "quantity"> {
 export default function Shop() {
   const [filter, setFilter] = useState<"all" | "soap" | "shampoo">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts);
+  const [filteredProducts, setFilteredProducts] =
+    useState<Product[]>(allProducts);
   const { addToBasket } = useBasket();
 
   useEffect(() => {
@@ -48,8 +49,8 @@ export default function Shop() {
     if (searchQuery.trim() !== "") {
       const query = searchQuery.toLowerCase();
       products = products.filter(
-        (product) => 
-          product.name.toLowerCase().includes(query) || 
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
           product.type.toLowerCase().includes(query)
       );
     }
@@ -67,15 +68,12 @@ export default function Shop() {
     toast.success(`${product.name} added to basket`);
   };
 
-
   return (
     <div className="min-h-screen bg-white">
-      <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-12">
+      <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-2">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold text-black uppercase mb-4 md:mb-0">
-              Shop
-            </h1>
+            <h1 className="text-4xl font-bold text-black mb-4 md:mb-0">Shop</h1>
             <div className="w-full md:w-1/3 relative">
               <Input
                 type="search"
@@ -84,11 +82,23 @@ export default function Shop() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="bg-white border-black rounded-none pr-10"
               />
-              <button 
+              <button
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                onClick={() => {/* Search happens live */}}
+                onClick={() => {
+                  /* Search happens live */
+                }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
@@ -97,9 +107,8 @@ export default function Shop() {
           </div>
         </div>
       </div>
-      
-      <div className="container mx-auto px-4 py-8">
 
+      <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Tabs defaultValue="all" className="mb-4 md:mb-0">
             <TabsList className="bg-gray-100">
