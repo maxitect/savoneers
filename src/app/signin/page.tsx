@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import Button from "@/components/Button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -81,13 +82,9 @@ export default function Login() {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-teal-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-600 transition duration-300 disabled:opacity-50"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Signing In..." : "Sign In"}
-        </button>
+        </Button>
       </form>
       <p className="mt-4 text-center">
         Don&apos;t have an account?{" "}

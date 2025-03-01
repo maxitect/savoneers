@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Button from "@/components/Button";
 
 export default function Subscription() {
   const [plan, setPlan] = useState<"monthly" | "bimonthly">("monthly");
@@ -32,7 +33,7 @@ export default function Subscription() {
             onClick={() => setPlan("monthly")}
             className={`px-6 py-2 rounded-full ${
               plan === "monthly"
-                ? "bg-teal-500 text-white"
+                ? "bg-pink-500 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -42,7 +43,7 @@ export default function Subscription() {
             onClick={() => setPlan("bimonthly")}
             className={`px-6 py-2 rounded-full ${
               plan === "bimonthly"
-                ? "bg-teal-500 text-white"
+                ? "bg-pink-500 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -54,7 +55,7 @@ export default function Subscription() {
             onClick={() => setQuantity("basic")}
             className={`px-6 py-2 rounded-full ${
               quantity === "basic"
-                ? "bg-teal-500 text-white"
+                ? "bg-pink-500 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -64,7 +65,7 @@ export default function Subscription() {
             onClick={() => setQuantity("premium")}
             className={`px-6 py-2 rounded-full ${
               quantity === "premium"
-                ? "bg-teal-500 text-white"
+                ? "bg-pink-500 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -87,12 +88,9 @@ export default function Subscription() {
         </div>
         <form>
           {/* Form fields remain the same */}
-          <button
-            type="submit"
-            className="w-full bg-teal-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-600 transition duration-300"
-          >
+          <Button type="submit" className="w-full">
             Start My Free Trial
-          </button>
+          </Button>
         </form>
         <p className="mt-4 text-sm text-gray-600 text-center">
           By subscribing, you agree to our{" "}
