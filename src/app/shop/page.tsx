@@ -3,35 +3,35 @@
 import Image from "next/image";
 import { BasketItem, useBasket } from "@/contexts/BasketContext";
 import toast from "react-hot-toast";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/Button";
 
 const products = [
   {
     id: "1",
     name: "Lavender Dream",
     price: 5.99,
-    image: "/products/lavender.webp",
+    image: "/products/lavender.jpeg",
   },
   {
     id: "2",
     name: "Citrus Burst",
     price: 5.99,
-    image: "/products/citrus.webp",
+    image: "/products/citrus.jpeg",
   },
-  { id: "3", name: "Ocean Breeze", price: 5.99, image: "/products/ocean.webp" },
+  { id: "3", name: "Ocean Breeze", price: 5.99, image: "/products/ocean.jpeg" },
   {
     id: "4",
     name: "Vanilla Bliss",
     price: 5.99,
-    image: "/products/vanilla.webp",
+    image: "/products/vanilla.jpeg",
   },
   {
     id: "5",
     name: "Eucalyptus Mint",
     price: 5.99,
-    image: "/products/eucalyptus.webp",
+    image: "/products/eucalyptus.jpeg",
   },
-  { id: "6", name: "Rose Petal", price: 5.99, image: "/products/rose.webp" },
+  { id: "6", name: "Rose Petal", price: 5.99, image: "/products/rose.jpeg" },
 ];
 
 interface Product extends Omit<BasketItem, "quantity"> {
@@ -68,7 +68,6 @@ export default function Shop() {
               <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
               <p className="text-gray-600 mb-4">£{product.price.toFixed(2)}</p>
               <Button
-                className="rounded-full bg-pink-500"
                 onClick={() => handleAddToBasket(product)}
               >
                 Add to Basket
