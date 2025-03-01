@@ -5,15 +5,16 @@ import Image from "next/image";
 import { BasketItem, useBasket } from "@/contexts/BasketContext";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Import data from JSON files
 import soapData from "@/data/soap.json";
 import shampooData from "@/data/shampoo.json";
 
-// Add type property to each product
-const soaps = soapData.map(product => ({ ...product, type: "soap" }));
-const shampoos = shampooData.map(product => ({ ...product, type: "shampoo" }));
+const soaps = soapData.map((product) => ({ ...product, type: "soap" }));
+const shampoos = shampooData.map((product) => ({
+  ...product,
+  type: "shampoo",
+}));
 const allProducts = [...soaps, ...shampoos];
 
 interface Product extends Omit<BasketItem, "quantity"> {
@@ -23,23 +24,26 @@ interface Product extends Omit<BasketItem, "quantity"> {
 
 export default function Shop() {
   const [filter, setFilter] = useState<"all" | "soap" | "shampoo">("all");
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts);
+  const [filteredProducts, setFilteredProducts] =
+    useState<Product[]>(allProducts);
   const { addToBasket } = useBasket();
 
   useEffect(() => {
     if (filter === "all") {
       setFilteredProducts(allProducts);
     } else {
-      setFilteredProducts(allProducts.filter(product => product.type === filter));
+      setFilteredProducts(
+        allProducts.filter((product) => product.type === filter)
+      );
     }
   }, [filter]);
 
   const handleAddToBasket = (product: Product) => {
-    addToBasket({ 
-      id: product.id, 
-      name: product.name, 
-      price: product.price, 
-      quantity: 1 
+    addToBasket({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
     });
     toast.success(`${product.name} added to basket`);
   };
@@ -49,25 +53,16 @@ export default function Shop() {
       <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
         Our Products
       </h1>
-      
+
       <Tabs defaultValue="all" className="mb-8">
         <TabsList className="grid w-full max-w-md mx-auto grid-cols-3">
-          <TabsTrigger 
-            value="all" 
-            onClick={() => setFilter("all")}
-          >
+          <TabsTrigger value="all" onClick={() => setFilter("all")}>
             All Products
           </TabsTrigger>
-          <TabsTrigger 
-            value="soap" 
-            onClick={() => setFilter("soap")}
-          >
+          <TabsTrigger value="soap" onClick={() => setFilter("soap")}>
             Soaps
           </TabsTrigger>
-          <TabsTrigger 
-            value="shampoo" 
-            onClick={() => setFilter("shampoo")}
-          >
+          <TabsTrigger value="shampoo" onClick={() => setFilter("shampoo")}>
             Shampoo Bars
           </TabsTrigger>
         </TabsList>
