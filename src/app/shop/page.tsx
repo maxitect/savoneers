@@ -18,7 +18,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import soapData from "@/data/soap.json";
 import shampooData from "@/data/shampoo.json";
@@ -35,27 +34,28 @@ interface Product extends Omit<BasketItem, "quantity"> {
   type: string;
 }
 
-type SortOption = 
-  | "price-asc" 
-  | "price-desc" 
-  | "name-asc" 
-  | "name-desc" 
+type SortOption =
+  | "price-asc"
+  | "price-desc"
+  | "name-asc"
+  | "name-desc"
   | "newest";
 
 export default function Shop() {
   const [filter, setFilter] = useState<"all" | "soap" | "shampoo">("all");
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts);
+  const [filteredProducts, setFilteredProducts] =
+    useState<Product[]>(allProducts);
   const [sortBy, setSortBy] = useState<SortOption>("price-asc");
   const { addToBasket } = useBasket();
 
   useEffect(() => {
     let products = [...allProducts];
-    
+
     // Apply filter
     if (filter !== "all") {
       products = products.filter((product) => product.type === filter);
     }
-    
+
     // Apply sorting
     switch (sortBy) {
       case "price-asc":
@@ -75,7 +75,7 @@ export default function Shop() {
         // For now, we'll just use the original order
         break;
     }
-    
+
     setFilteredProducts(products);
   }, [filter, sortBy]);
 
@@ -91,11 +91,16 @@ export default function Shop() {
 
   const getSortLabel = (sort: SortOption): string => {
     switch (sort) {
-      case "price-asc": return "Price: lowest to highest";
-      case "price-desc": return "Price: highest to lowest";
-      case "name-asc": return "Name: A to Z";
-      case "name-desc": return "Name: Z to A";
-      case "newest": return "Newest first";
+      case "price-asc":
+        return "Price: lowest to highest";
+      case "price-desc":
+        return "Price: highest to lowest";
+      case "name-asc":
+        return "Name: A to Z";
+      case "name-desc":
+        return "Name: Z to A";
+      case "newest":
+        return "Newest first";
     }
   };
 
@@ -152,8 +157,8 @@ export default function Shop() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <Card 
-              key={product.id} 
+            <Card
+              key={product.id}
               className="group border-black rounded-none overflow-hidden"
             >
               <div className="relative aspect-square overflow-hidden bg-gray-100">
@@ -163,28 +168,30 @@ export default function Shop() {
                   fill
                   className="object-cover transition-transform group-hover:scale-105"
                 />
-                <div className="absolute top-2 left-2 bg-white text-teal-800 px-2 py-1 text-xs font-medium capitalize">
+                <div className="absolute top-2 left-2 bg-white px-2 py-1 text-xs font-medium capitalize">
                   {product.type}
                 </div>
               </div>
-              
+
               <CardHeader className="px-4 pt-4 pb-0">
                 <h3 className="font-medium text-lg">{product.name}</h3>
               </CardHeader>
-              
+
               <CardContent className="px-4 py-2">
                 <div className="flex items-center text-sm text-gray-600 space-x-2">
                   <span className="capitalize">{product.type}</span>
                 </div>
-                <p className="font-semibold mt-2">£{product.price.toFixed(2)}</p>
               </CardContent>
-              
-              <CardFooter className="px-4 pb-4 pt-0">
+
+              <CardFooter className="px-4 pb-4 pt-0 flex justify-between">
+                <p className="font-semibold mt-2">
+                  £{product.price.toFixed(2)}
+                </p>
                 <Button
                   onClick={() => handleAddToBasket(product)}
-                  className="w-full bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors"
+                  className="bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors"
                 >
-                  Add to Basket
+                  Add
                 </Button>
               </CardFooter>
             </Card>
