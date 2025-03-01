@@ -70,7 +70,7 @@ export default function Shop() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-2">
+      <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-2 shadow-md">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <h1 className="text-4xl font-bold text-black mb-4 md:mb-0">Shop</h1>
@@ -111,14 +111,26 @@ export default function Shop() {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Tabs defaultValue="all" className="mb-4 md:mb-0">
-            <TabsList className="bg-gray-100">
-              <TabsTrigger value="all" onClick={() => setFilter("all")}>
+            <TabsList className="bg-white border border-black rounded-none">
+              <TabsTrigger 
+                value="all" 
+                onClick={() => setFilter("all")}
+                className="rounded-none data-[state=active]:bg-black data-[state=active]:text-white"
+              >
                 All Products
               </TabsTrigger>
-              <TabsTrigger value="soap" onClick={() => setFilter("soap")}>
+              <TabsTrigger 
+                value="soap" 
+                onClick={() => setFilter("soap")}
+                className="rounded-none data-[state=active]:bg-black data-[state=active]:text-white"
+              >
                 Soaps
               </TabsTrigger>
-              <TabsTrigger value="shampoo" onClick={() => setFilter("shampoo")}>
+              <TabsTrigger 
+                value="shampoo" 
+                onClick={() => setFilter("shampoo")}
+                className="rounded-none data-[state=active]:bg-black data-[state=active]:text-white"
+              >
                 Shampoo Bars
               </TabsTrigger>
             </TabsList>
