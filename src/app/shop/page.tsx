@@ -10,6 +10,7 @@ import {
   Card,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import {
   DropdownMenu,
@@ -58,16 +59,16 @@ export default function Shop() {
     // Apply sorting
     switch (sortBy) {
       case "price-asc":
-        products.sort((a, b) => a.price - b.price);
+        products = [...products].sort((a, b) => a.price - b.price);
         break;
       case "price-desc":
-        products.sort((a, b) => b.price - a.price);
+        products = [...products].sort((a, b) => b.price - a.price);
         break;
       case "name-asc":
-        products.sort((a, b) => a.name.localeCompare(b.name));
+        products = [...products].sort((a, b) => a.name.localeCompare(b.name));
         break;
       case "name-desc":
-        products.sort((a, b) => b.name.localeCompare(a.name));
+        products = [...products].sort((a, b) => b.name.localeCompare(a.name));
         break;
       case "newest":
         // In a real app, you'd have a date field to sort by
@@ -146,63 +147,16 @@ export default function Shop() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="border-gray-300">
-                  FILTER
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium mb-2">Product Type</h3>
-                    <div className="space-y-2">
-                      <div className="flex items-center">
-                        <input 
-                          type="radio" 
-                          id="all" 
-                          name="type" 
-                          checked={filter === "all"} 
-                          onChange={() => setFilter("all")}
-                          className="mr-2"
-                        />
-                        <label htmlFor="all">All Products</label>
-                      </div>
-                      <div className="flex items-center">
-                        <input 
-                          type="radio" 
-                          id="soap" 
-                          name="type" 
-                          checked={filter === "soap"} 
-                          onChange={() => setFilter("soap")}
-                          className="mr-2"
-                        />
-                        <label htmlFor="soap">Soaps</label>
-                      </div>
-                      <div className="flex items-center">
-                        <input 
-                          type="radio" 
-                          id="shampoo" 
-                          name="type" 
-                          checked={filter === "shampoo"} 
-                          onChange={() => setFilter("shampoo")}
-                          className="mr-2"
-                        />
-                        <label htmlFor="shampoo">Shampoo Bars</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="group">
-              <div className="relative mb-3 aspect-square overflow-hidden bg-gray-100">
+            <Card 
+              key={product.id} 
+              className="group border-black rounded-none overflow-hidden"
+            >
+              <div className="relative aspect-square overflow-hidden bg-gray-100">
                 <Image
                   src={product.image || "/placeholder.svg"}
                   alt={product.name}
@@ -214,23 +168,26 @@ export default function Shop() {
                 </div>
               </div>
               
-              <div className="space-y-1">
+              <CardHeader className="px-4 pt-4 pb-0">
                 <h3 className="font-medium text-lg">{product.name}</h3>
+              </CardHeader>
+              
+              <CardContent className="px-4 py-2">
                 <div className="flex items-center text-sm text-gray-600 space-x-2">
                   <span className="capitalize">{product.type}</span>
                 </div>
-                <div className="flex justify-between items-center pt-2">
-                  <p className="font-semibold">£{product.price.toFixed(2)}</p>
-                  <Button
-                    onClick={() => handleAddToBasket(product)}
-                    size="sm"
-                    className="bg-teal-700 hover:bg-teal-800 text-white"
-                  >
-                    ADD
-                  </Button>
-                </div>
-              </div>
-            </div>
+                <p className="font-semibold mt-2">£{product.price.toFixed(2)}</p>
+              </CardContent>
+              
+              <CardFooter className="px-4 pb-4 pt-0">
+                <Button
+                  onClick={() => handleAddToBasket(product)}
+                  className="w-full bg-black text-white border border-black rounded-none hover:bg-white hover:text-black transition-colors"
+                >
+                  Add to Basket
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </div>
