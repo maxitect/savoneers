@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BasketItem, useBasket } from "@/contexts/BasketContext";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
@@ -43,12 +44,13 @@ type SortOption =
 
 export default function Shop() {
   const [filter, setFilter] = useState<"all" | "soap" | "shampoo">("all");
-  const [filteredProducts, setFilteredProducts] =
-    useState<Product[]>(allProducts);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts);
   const [sortBy, setSortBy] = useState<SortOption>("price-asc");
   const { addToBasket } = useBasket();
 
   useEffect(() => {
+    // Start with a fresh copy of all products
     let products = [...allProducts];
 
     // Apply filter
@@ -56,19 +58,31 @@ export default function Shop() {
       products = products.filter((product) => product.type === filter);
     }
 
+    // Apply search query
+    if (searchQuery.trim() !== "") {
+      const query = searchQuery.toLowerCase();
+      products = products.filter(
+        (product) => 
+          product.name.toLowerCase().includes(query) || 
+          product.type.toLowerCase().includes(query)
+      );
+    }
+
     // Apply sorting
+    const sortedProducts = [...products]; // Create a new array to avoid mutation issues
+    
     switch (sortBy) {
       case "price-asc":
-        products = [...products].sort((a, b) => a.price - b.price);
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
       case "price-desc":
-        products = [...products].sort((a, b) => b.price - a.price);
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
       case "name-asc":
-        products = [...products].sort((a, b) => a.name.localeCompare(b.name));
+        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case "name-desc":
-        products = [...products].sort((a, b) => b.name.localeCompare(a.name));
+        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
         break;
       case "newest":
         // In a real app, you'd have a date field to sort by
@@ -76,8 +90,8 @@ export default function Shop() {
         break;
     }
 
-    setFilteredProducts(products);
-  }, [filter, sortBy]);
+    setFilteredProducts(sortedProducts);
+  }, [filter, sortBy, searchQuery]);
 
   const handleAddToBasket = (product: Product) => {
     addToBasket({
@@ -105,11 +119,27 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-white py-12">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 text-teal-800 text-center">
-          Our Products
-        </h1>
+    <div className="min-h-screen bg-white">
+      <div className="bg-gradient-to-br from-[#cc725a] to-[#ea9f84] pt-24 pb-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+            <h1 className="text-4xl font-bold text-white mb-4 md:mb-0">
+              Our Products
+            </h1>
+            <div className="w-full md:w-1/3">
+              <Input
+                type="search"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-white/90 border-none"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-8">
 
         <div className="flex flex-col md:flex-row justify-between items-start mb-8">
           <Tabs defaultValue="all" className="mb-4 md:mb-0">
