@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+
 export default function Contact() {
   return (
     <div className="container mx-auto px-4 py-12">
@@ -66,12 +68,9 @@ export default function Contact() {
               required
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-teal-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-600 transition duration-300"
-          >
+          <Button type="submit" className="w-full">
             Send Message
-          </button>
+          </Button>
         </form>
       </div>
     </div>
