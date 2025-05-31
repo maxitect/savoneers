@@ -1,103 +1,179 @@
 import Image from "next/image";
 import Title from "@/components/Title";
-import { Card, CardContent } from "@/components/ui/card";
+import CTAButton from "@/components/CTAButton";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
       <Title title="About" showSearch={false} />
 
-      <div className="container mx-auto px-4 py-12">
-        <Card className="border-black rounded-none shadow-md mb-12">
-          <CardContent className="p-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center p-8">
-              <div>
-                <Image
-                  src="/about/story.jpeg"
-                  alt="Savoneers workshop"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                />
-              </div>
-              <div>
-                <h2 className="text-2xl font-semibold mb-4 text-teal-700">
-                  Our Story
-                </h2>
-                <p className="mb-4 text-gray-700">
-                  Today, many commercial soaps are filled with synthetic
-                  chemicals and artificial additives. Ingredients like triclosan
-                  and parabens have been linked to skin irritation and hormonal
-                  disruptions. Additionally, the widespread use of palm oil in
-                  soap production has led to significant deforestation,
-                  threatening wildlife habitats and contributing to climate
-                  change.
-                </p>
-                <p className="mb-4 text-gray-700">
-                  Disheartened by these realities, Maxime founded Savoneers with
-                  a simple belief: skincare should nurture the skin and be kind
-                  to the planet. Partnering with local artisans across England,
-                  we set out to create natural, sustainable soaps free from
-                  harmful additives and environmentally damaging ingredients.
-                </p>
-                <h2 className="text-2xl font-semibold mb-4 text-teal-700">
-                  Our Mission
-                </h2>
-                <p className="text-gray-700">
-                  At Savoneers, our mission is to revolutionize your daily
-                  cleansing routine by providing high-quality, eco-friendly soap
-                  and shampoo bars that are as good for your skin as they are
-                  for the environment. We are committed to:
-                </p>
-                <ul className="list-disc list-inside text-gray-700 mb-4">
-                  <li>
-                    <strong>Natural Ingredients:</strong> Our soaps are crafted
-                    using plant-based oils and botanical extracts, ensuring a
-                    gentle and nourishing experience for all skin types.
-                  </li>
-                  <li>
-                    <strong>Palm Oil-Free Products:</strong> By excluding palm
-                    oil from our formulations, we actively combat deforestation
-                    and promote biodiversity.
-                  </li>
-                  <li>
-                    <strong>Supporting Local Artisans:</strong> All our products
-                    are proudly made in England, supporting local communities
-                    and preserving traditional craftsmanship.
-                  </li>
-                  <li>
-                    <strong>Eco-Friendly Practices:</strong> From sourcing to
-                    packaging, we employ sustainable methods to minimize our
-                    environmental footprint.
-                  </li>
-                </ul>
-                <p className="text-gray-700">
-                  By choosing Savoneers, you&apos;re embracing a healthier
-                  skincare routine and joining a movement towards a more
-                  sustainable and ethical world. Together, we can make a
-                  difference—one soap bar at a time.
-                </p>
-              </div>
+      <div className="container mx-auto px-4 py-16 max-w-6xl">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
+            Our Mission
+          </h2>
+          <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            Savoneers was founded with a simple belief: skincare should nurture
+            your skin and be kind to the planet. We're on a mission to create
+            natural, sustainable soap bars that are effective, ethical, and
+            delivered with care. Our passion lies in crafting handmade products
+            for everyone who values quality and sustainability. Naturally.
+          </p>
+          <p className="text-lg text-gray-600 mt-4 font-medium">
+            Quite simply, Savoneers is soap-making with a conscience.
+          </p>
+        </div>
+
+        <div className="space-y-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 gap-8 items-center">
+            <div className="lg:pr-12">
+              <Image
+                src="/about/story.jpeg"
+                alt="Handcrafted soap making process"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
             </div>
-          </CardContent>
-        </Card>
-        <Card className="border-black rounded-none shadow-md">
-          <CardContent className="p-8 text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-teal-700">
-              Join Our Community
-            </h2>
-            <p className="mb-4 text-gray-700">
-              Stay updated with our latest products, artisan stories, and
-              sustainability tips.
-            </p>
-            <a
-              href="/subscription"
-              className="inline-block bg-black text-white px-6 py-3 border border-black rounded-none shadow-md hover:bg-white hover:text-black transition-colors"
-            >
-              Subscribe to Our Newsletter
-            </a>
-          </CardContent>
-        </Card>
+            <div className="lg:pl-12 px-4 lg:px-0">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+                Naturally kind skincare
+              </h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                At Savoneers we don't do chemicals, just natural ingredients
+                that deliver real results.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Packed with simple, plant-based oils and botanical extracts so
+                they're kinder to your skin. We only include things that do you
+                good, and leave out synthetic additives, parabens, and harsh
+                chemicals.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 gap-8 items-center">
+            <div className="order-2 lg:order-1 lg:pr-12 px-4 lg:px-0">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+                Palm oil-free promise
+              </h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                We've completely eliminated palm oil from our formulations to
+                protect rainforests and wildlife habitats.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                By choosing alternative sustainable oils, we actively combat
+                deforestation whilst maintaining the luxurious lather and
+                moisturising properties you expect from premium soap bars.
+              </p>
+            </div>
+            <div className="order-1 lg:order-2 lg:pl-12">
+              <Image
+                src="/about/sustainability.jpeg"
+                alt="Sustainable ingredients and packaging"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 gap-8 items-center">
+            <div className="lg:pr-12">
+              <Image
+                src="/about/handwash.jpeg"
+                alt="Natural soap in use"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="lg:pl-12 px-4 lg:px-0">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+                Zero plastic packaging
+              </h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Our range of plastic-free products has grown beautifully and we
+                couldn't be more proud.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Every piece of packaging we use is recyclable or compostable.
+                From our soap wraps to shipping materials, we ensure your
+                skincare routine leaves no harmful trace on the environment.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 gap-8 items-center">
+            <div className="order-2 lg:order-1 lg:pr-12 px-4 lg:px-0">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+                Supporting local artisans
+              </h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Born and crafted in England. All our products are handmade right
+                here in the UK, allowing us to reduce transport emissions whilst
+                supporting local communities.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                We partner with skilled artisans who share our values,
+                preserving traditional soap-making techniques whilst creating
+                employment in local communities.
+              </p>
+            </div>
+            <div className="order-1 lg:order-2 lg:pl-12">
+              <Image
+                src="/about/soap.jpeg"
+                alt="Handcrafted soap bars"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 gap-8 items-center">
+            <div className="lg:pr-12">
+              <Image
+                src="/about/products.jpeg"
+                alt="Range of natural soap products"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="lg:pl-12 px-4 lg:px-0">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+                Kind to all creatures
+              </h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Our products are always vegan and cruelty-free. We don't use
+                ingredients that contain animal derivatives.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                We never test on animals, or work with suppliers that do. Every
+                soap bar is crafted with compassion for both your skin and the
+                creatures we share this planet with.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-24 bg-gradient-to-br from-pink_main to-pink_secondary p-12">
+          <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">
+            Transparent approach
+          </h3>
+          <p className="text-gray-700 mb-6 leading-relaxed max-w-3xl mx-auto">
+            We pride ourselves on our transparency and strive to be open and
+            honest. We rely on customer feedback to help us improve as we grow,
+            creating products that truly make a difference.
+          </p>
+          <CTAButton
+            href="/subscription"
+            ariaLabel="Start your subscription journey with Savoneers"
+          >
+            Start Your Free Trial
+          </CTAButton>
+        </div>
       </div>
     </div>
   );
