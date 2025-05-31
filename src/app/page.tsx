@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import CTAButton from "@/components/CTAButton";
 import {
   Popover,
   PopoverTrigger,
@@ -26,7 +26,6 @@ export default function Home() {
 
   return (
     <section className="relative h-screen flex flex-col items-center px-4 py-12 text-center">
-      {/* Background Image */}
       <Image
         src="/subscription_box.jpg"
         alt="Background Image"
@@ -34,7 +33,6 @@ export default function Home() {
         className="absolute inset-0 object-cover object-left-bottom -z-10"
       />
 
-      {/* Hero Section */}
       <div className="mt-20 flex flex-col justify-between h-screen w-screen">
         <div>
           <h1 className=" text-4xl md:text-6xl font-bold text-black">
@@ -46,17 +44,16 @@ export default function Home() {
           </p>
         </div>
         <div>
-          <Link
+          <CTAButton
             href="/subscription"
-            className="bg-black text-white hover:bg-white hover:text-black border-2 border-black px-8 py-3 text-lg font-semibold transition duration-300"
+            ariaLabel="Start your free trial subscription with Savoneers"
           >
             Start Your Free Trial
-          </Link>
+          </CTAButton>
           <p className="mt-4 text-black font-semibold">
             First month free! No commitment required.
           </p>
         </div>
-        {/* Popover Buttons at the Bottom */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-4 w-full">
           {items.map((item, index) => (
             <Popover key={index}>
